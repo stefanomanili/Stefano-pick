@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefano's Pick — Guide Gastronomiche</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8;
+  --charcoal: #1A1A1A;
+  --gold: #B8903F;
+  --gold-light: #C9A85C;
+  --muted: #6B6560;
+  --warm: #FDFAF4;
+  --lg: #DDD8CF;
+  --dark-text: #2C2825;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 15% 30%, rgba(201,168,92,.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(184,144,63,.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative circles */
+.deco {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid rgba(184,144,63,.18);
+  pointer-events: none;
+  z-index: 0;
+}
+.deco-1 { width: 600px; height: 600px; top: -200px; right: -200px; }
+.deco-2 { width: 400px; height: 400px; bottom: -100px; left: -150px; border-color: rgba(184,144,63,.1); }
+.deco-3 { width: 200px; height: 200px; top: 40%; left: 10%; border-color: rgba(184,144,63,.09); }
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+/* Header */
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .1s;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: 1;
+  letter-spacing: -2px;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--dark-text);
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .2s;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 64px;
+  letter-spacing: .3px;
+  line-height: 1.7;
+  max-width: 400px;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .35s;
+}
+
+/* City cards grid */
+.cities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  width: 100%;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .5s;
+}
+
+.city-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  background: white;
+  border: 1px solid var(--lg);
+  padding: 40px 36px 36px;
+  transition: all .35s cubic-bezier(.25,.46,.45,.94);
+}
+
+.city-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,168,92,.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.city-card:hover {
+  background: #FFFDF8;
+  border-color: var(--gold-light);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(184,144,63,.12);
+}
+
+.city-card:hover::before {
+  opacity: 1;
+}
+
+.city-card:hover .city-arrow {
+  transform: translateX(6px);
+  opacity: 1;
+  color: var(--gold);
+}
+
+.city-card:hover .city-num {
+  color: var(--gold);
+}
+
+.city-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(184,144,63,.6);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+  transition: color .35s ease;
+}
+
+.city-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+  color: var(--dark-text);
+}
+
+.city-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.city-region {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #AAA49E;
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+
+.city-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.city-count {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.city-count::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--gold-light);
+}
+
+.city-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(184,144,63,.3);
+  color: var(--gold);
+  padding: 2px 7px;
+  border-radius: 1px;
+  background: rgba(201,168,92,.05);
+}
+
+.city-arrow {
+  position: absolute;
+  bottom: 36px;
+  right: 36px;
+  font-size: 18px;
+  color: var(--lg);
+  opacity: 1;
+  transition: all .35s ease;
+}
+
+/* Coming soon card */
+.city-card.soon {
+  opacity: .5;
+  cursor: default;
+  pointer-events: none;
+  background: #F8F5F0;
+}
+
+.city-card.soon .city-name {
+  color: #AAA49E;
+}
+
+.soon-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid var(--lg);
+  color: var(--muted);
+  padding: 3px 8px;
+  background: white;
+}
+
+/* Footer */
+.footer {
+  margin-top: 56px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .7s;
+}
+
+.footer-text {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #BBB5AE;
+}
+
+.gold-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  margin: 20px auto 16px;
+}
+
+.section-divider {
+  width: 100%;
+  max-width: 900px;
+  margin: 48px 0 2px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp .8s ease forwards .6s;
+}
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--lg);
+}
+.section-divider-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #BBB5AE;
+  white-space: nowrap;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (min-width: 620px) {
+  .cities {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper { padding: 40px 16px; }
+  .city-card { padding: 28px 24px 28px; }
+  .city-arrow { bottom: 24px; right: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deco deco-1"></div>
+<div class="deco deco-2"></div>
+<div class="deco deco-3"></div>
+
+<div class="wrapper">
+
+  <p class="eyebrow">Edizione 2026 · Stefano's Pick</p>
+
+  <h1>Guide<br><em>Gastronomiche</em></h1>
+
+  <p class="subtitle">Una selezione curata dei migliori ristoranti città per città, con i punteggi di Michelin, Gambero Rosso e L'Espresso.</p>
+
+  <div class="cities">
+
+    <a href="https://stefanomanili.github.io/Guida-Ristoranti/" class="city-card">
+      <span class="city-num">01 · Lombardia</span>
+      <div class="city-name"><em>Mi</em>lano</div>
+      <div class="city-region">Nord Italia</div>
+      <div class="city-meta">
+        <span class="city-count">100 ristoranti</span>
+      </div>
+      <div class="city-tags" style="margin-top:12px">
+        <span class="tag">Michelin</span>
+        <span class="tag">Gambero Rosso</span>
+        <span class="tag">Espresso</span>
+      </div>
+      <span class="city-arrow">→</span>
+    </a>
+
+    <a href="https://stefanomanili.github.io/Guida-Ristoranti-Roma/" class="city-card">
+      <span class="city-num">02 · Lazio</span>
+      <div class="city-name"><em>Ro</em>ma</div>
+      <div class="city-region">Centro Italia</div>
+      <div class="city-meta">
+        <span class="city-count">46 ristoranti</span>
+      </div>
+      <div class="city-tags" style="margin-top:12px">
+        <span class="tag">Michelin</span>
+        <span class="tag">Gambero Rosso</span>
+        <span class="tag">Espresso</span>
+      </div>
+      <span class="city-arrow">→</span>
+    </a>
+
+    <a href="#" class="city-card soon">
+      <span class="soon-badge">Prossimamente</span>
+      <span class="city-num">03 · Piemonte</span>
+      <div class="city-name"><em>To</em>rino</div>
+      <div class="city-region">Nord Italia</div>
+      <div class="city-meta">
+        <span class="city-count">In arrivo</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-divider">
+    <span class="section-divider-label">Fuori dalla città</span>
+  </div>
+
+  <div class="cities" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+
+    <a href="#" class="city-card soon">
+      <span class="soon-badge">Prossimamente</span>
+      <span class="city-num">04 · Costiera &amp; Isole</span>
+      <div class="city-name"><em>Ma</em>re</div>
+      <div class="city-region">Mediterraneo &amp; Adriatico</div>
+      <div class="city-meta">
+        <span class="city-count">In arrivo</span>
+      </div>
+      <div class="city-tags" style="margin-top:12px">
+        <span class="tag">Costiera Amalfitana</span>
+        <span class="tag">Sicilia</span>
+        <span class="tag">Sardegna</span>
+      </div>
+    </a>
+
+    <a href="#" class="city-card soon">
+      <span class="soon-badge">Prossimamente</span>
+      <span class="city-num">05 · Alpi &amp; Dolomiti</span>
+      <div class="city-name"><em>Mon</em>tagna</div>
+      <div class="city-region">Nord Italia</div>
+      <div class="city-meta">
+        <span class="city-count">In arrivo</span>
+      </div>
+      <div class="city-tags" style="margin-top:12px">
+        <span class="tag">Val Gardena</span>
+        <span class="tag">Courmayeur</span>
+        <span class="tag">Cortina</span>
+      </div>
+    </a>
+
+    <a href="#" class="city-card soon">
+      <span class="soon-badge">Prossimamente</span>
+      <span class="city-num">06 · Territorio &amp; Cascine</span>
+      <div class="city-name"><em>Cam</em>pagna</div>
+      <div class="city-region">Toscana &amp; Umbria</div>
+      <div class="city-meta">
+        <span class="city-count">In arrivo</span>
+      </div>
+      <div class="city-tags" style="margin-top:12px">
+        <span class="tag">Chianti</span>
+        <span class="tag">Langhe</span>
+        <span class="tag">Umbria</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <div class="gold-line"></div>
+    <p class="footer-text">Curated by Stefano Manili · 2026</p>
+  </div>
+
+</div>
+
+</body>
+</html>
