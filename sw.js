@@ -1,8 +1,8 @@
-const CACHE = 'stefanos-pick-v1';
+const CACHE = 'stefanos-pick-v2';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  '/Stefano-pick/',
+  '/Stefano-pick/index.html',
+  '/Stefano-pick/manifest.json',
   'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap'
 ];
 
