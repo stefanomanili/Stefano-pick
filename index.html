@@ -153,11 +153,7 @@ h1 em {
   opacity: 1;
 }
 
-.city-card:hover .city-arrow {
-  transform: translateX(6px);
-  opacity: 1;
-  color: var(--gold);
-}
+.city-card:hover 
 
 .city-card:hover .city-num {
   color: var(--gold);
@@ -236,15 +232,7 @@ h1 em {
   background: rgba(201,168,92,.05);
 }
 
-.city-arrow {
-  position: absolute;
-  bottom: 36px;
-  right: 36px;
-  font-size: 18px;
-  color: var(--lg);
-  opacity: 1;
-  transition: all .35s ease;
-}
+
 
 /* Coming soon card */
 .city-card.soon {
@@ -334,7 +322,7 @@ h1 em {
 @media (max-width: 480px) {
   .wrapper { padding: 40px 16px; }
   .city-card { padding: 28px 24px 28px; }
-  .city-arrow { bottom: 24px; right: 24px; }
+  
 }
 </style>
 </head>
@@ -356,43 +344,39 @@ h1 em {
 
     <a href="https://stefanomanili.github.io/Guida-Ristoranti/" class="city-card">
       <span class="city-num">01 · Lombardia</span>
-      <div class="city-name"><em>Mi</em>lano</div>
-      <div class="city-region">Nord Italia</div>
-      <div class="city-meta">
-        <span class="city-count">100 ristoranti</span>
-      </div>
-      <div class="city-tags" style="margin-top:12px">
-        <span class="tag">Michelin</span>
-        <span class="tag">Gambero Rosso</span>
-        <span class="tag">Espresso</span>
-      </div>
-      <span class="city-arrow">→</span>
-    </a>
+      <div class="city-name" style="display:flex;align-items:baseline;"><em>Mi</em>lano<em style="margin-left:auto;font-size:clamp(28px,4vw,52px);letter-spacing:-2px;line-height:1;">100</em></div>
+      
+                </a>
 
     <a href="https://stefanomanili.github.io/Ristoranti-Roma/" class="city-card">
       <span class="city-num">02 · Lazio</span>
-      <div class="city-name"><em>Ro</em>ma</div>
-      <div class="city-region">Centro Italia</div>
-      <div class="city-meta">
-        <span class="city-count">68 ristoranti</span>
-      </div>
-      <div class="city-tags" style="margin-top:12px">
-        <span class="tag">Michelin</span>
-        <span class="tag">Gambero Rosso</span>
-        <span class="tag">Espresso</span>
-      </div>
-      <span class="city-arrow">→</span>
-    </a>
+      <div class="city-name" style="display:flex;align-items:baseline;"><em>Ro</em>ma<em style="margin-left:auto;font-size:clamp(28px,4vw,52px);letter-spacing:-2px;line-height:1;">68</em></div>
+      
+                </a>
 
-    <a href="#" class="city-card soon">
-      <span class="soon-badge">Prossimamente</span>
+    <a href="https://stefanomanili.github.io/Guida-Ristoranti-Torino/" class="city-card">
       <span class="city-num">03 · Piemonte</span>
-      <div class="city-name"><em>To</em>rino</div>
-      <div class="city-region">Nord Italia</div>
-      <div class="city-meta">
-        <span class="city-count">In arrivo</span>
-      </div>
-    </a>
+      <div class="city-name" style="display:flex;align-items:baseline;"><em>To</em>rino<em style="margin-left:auto;font-size:clamp(28px,4vw,52px);letter-spacing:-2px;line-height:1;">31</em></div>
+      
+                </a>
+
+    <a href="https://stefanomanili.github.io/Guida-Ristoranti-Bologna/" class="city-card">
+      <span class="city-num">04 · Emilia Romagna</span>
+      <div class="city-name" style="display:flex;align-items:baseline;"><em>Bo</em>logna<em style="margin-left:auto;font-size:clamp(28px,4vw,52px);letter-spacing:-2px;line-height:1;">20</em></div>
+      
+                </a>
+
+    <a href="https://stefanomanili.github.io/Guida-Ristoranti-Firenze/" class="city-card">
+      <span class="city-num">05 · Toscana</span>
+      <div class="city-name" style="display:flex;align-items:baseline;"><em>Fi</em>renze<em style="margin-left:auto;font-size:clamp(28px,4vw,52px);letter-spacing:-2px;line-height:1;">20</em></div>
+      
+                </a>
+
+    <a href="https://stefanomanili.github.io/Guida-Ristoranti-Napoli/" class="city-card">
+      <span class="city-num">06 · Campania</span>
+      <div class="city-name" style="display:flex;align-items:baseline;"><em>Na</em>poli<em style="margin-left:auto;font-size:clamp(28px,4vw,52px);letter-spacing:-2px;line-height:1;">20</em></div>
+      
+                </a>
 
   </div>
 
@@ -406,46 +390,28 @@ h1 em {
       <span class="soon-badge">Prossimamente</span>
       <span class="city-num">04 · Costiera &amp; Isole</span>
       <div class="city-name"><em>Ma</em>re</div>
-      <div class="city-region">Mediterraneo &amp; Adriatico</div>
-      <div class="city-meta">
+            <div class="city-meta">
         <span class="city-count">In arrivo</span>
       </div>
-      <div class="city-tags" style="margin-top:12px">
-        <span class="tag">Costiera Amalfitana</span>
-        <span class="tag">Sicilia</span>
-        <span class="tag">Sardegna</span>
-      </div>
-    </a>
+          </a>
 
     <a href="#" class="city-card soon">
       <span class="soon-badge">Prossimamente</span>
       <span class="city-num">05 · Alpi &amp; Dolomiti</span>
       <div class="city-name"><em>Mon</em>tagna</div>
-      <div class="city-region">Nord Italia</div>
-      <div class="city-meta">
+            <div class="city-meta">
         <span class="city-count">In arrivo</span>
       </div>
-      <div class="city-tags" style="margin-top:12px">
-        <span class="tag">Val Gardena</span>
-        <span class="tag">Courmayeur</span>
-        <span class="tag">Cortina</span>
-      </div>
-    </a>
+          </a>
 
     <a href="#" class="city-card soon">
       <span class="soon-badge">Prossimamente</span>
       <span class="city-num">06 · Territorio &amp; Cascine</span>
       <div class="city-name"><em>Cam</em>pagna</div>
-      <div class="city-region">Toscana &amp; Umbria</div>
-      <div class="city-meta">
+            <div class="city-meta">
         <span class="city-count">In arrivo</span>
       </div>
-      <div class="city-tags" style="margin-top:12px">
-        <span class="tag">Chianti</span>
-        <span class="tag">Langhe</span>
-        <span class="tag">Umbria</span>
-      </div>
-    </a>
+          </a>
 
   </div>
 
